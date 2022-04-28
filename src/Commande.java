@@ -129,7 +129,7 @@ public class Commande extends JFrame {
 		btnNewButton.setBounds(972, 539, 159, 41);
 		panel.add(btnNewButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("Commande de Voiture");
+		JLabel lblNewLabel_1 = new JLabel("Gestion de Stock");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(308, 10, 554, 81);
@@ -164,10 +164,6 @@ public class Commande extends JFrame {
 		comboBox.setToolTipText("");
 		comboBox.setBounds(956, 69, 175, 34);
 		panel.add(comboBox);
-		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(466, 441, 85, 21);
-		panel.add(btnNewButton_2);
 		
 	
 	}
