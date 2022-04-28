@@ -168,6 +168,8 @@ public class Commande extends JFrame {
 		JButton btnNewButton_2 = new JButton("New button");
 		btnNewButton_2.setBounds(466, 441, 85, 21);
 		panel.add(btnNewButton_2);
+		
+		retun
 	}
 	
 	static Connection con () {
