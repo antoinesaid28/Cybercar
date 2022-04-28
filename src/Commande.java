@@ -169,7 +169,7 @@ public class Commande extends JFrame {
 		btnNewButton_2.setBounds(466, 441, 85, 21);
 		panel.add(btnNewButton_2);
 		
-		retun
+	
 	}
 	
 	static Connection con () {
