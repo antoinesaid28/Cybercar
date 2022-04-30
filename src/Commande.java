@@ -171,7 +171,7 @@ public class Commande extends JFrame {
 	static Connection con () {
 		try {
 			String drive ="com.mysql.jdbc.Driver";
-			String url = "jdbc:mysql://localhost/cybercar";
+			String url = "jdbc:mysql://localhost/sybercar";
 			Class.forName(drive);
 			return DriverManager.getConnection(url,"root","");
 		}catch(Exception e) {
@@ -183,7 +183,7 @@ public class Commande extends JFrame {
 	private void commande() {
 		Connection con = (Connection) con();
 		try {
-			String query = "INSERT INTO `commandevoiture`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
+			String query = "INSERT INTO `gestiondestock`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, txtMarque.getText() );
 			ps.setString(2, txtModele.getText() );
