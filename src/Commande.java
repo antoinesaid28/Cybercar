@@ -189,6 +189,30 @@ public class Commande extends JFrame {
 					e1.printStackTrace();
 				}
 			}
+
+				else if (comboBox.getSelectedItem() == "Entrepôts Phoenix"){
+				try {
+					String query = "SELECT * FROM `entrepôts phoenix`";
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+				PreparedStatement pst = con.prepareStatement(query);
+				ResultSet rs = pst.executeQuery();
+				table.setModel(DbUtils.resultSetToTableModel(rs));
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+				else  {
+					try {
+						String query = "SELECT * FROM `entrepôts plaisance`";
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+					PreparedStatement pst = con.prepareStatement(query);
+					ResultSet rs = pst.executeQuery();
+					table.setModel(DbUtils.resultSetToTableModel(rs));
+					}catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+				
 			}
 		});
 		btnNewButton_2.setBounds(980, 434, 151, 34);
@@ -235,6 +259,8 @@ public class Commande extends JFrame {
 		} catch (Exception e) {
 			System.out.println("error" + e);
 		}
+		
+		
 		}
 	
 		else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau") {
@@ -254,6 +280,42 @@ public class Commande extends JFrame {
 			System.out.println("error" + e);
 		}
 		}
+
+		else if (comboBox.getSelectedItem() == "entrepôts phoenix") {
+				
+		try {
+			String query ="INSERT INTO `entrepôts phoenix`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, txtMarque.getText() );
+			ps.setString(2, txtModele.getText() );
+			ps.setString(3, txtDate.getText() );
+			ps.setString(4, txtCouleur.getText() );
+			ps.setString(5, txtPrix.getText() );
+			ps.setString(6, txtQuantite.getText() );
+			ps.execute();
+       
+		} catch (Exception e) {
+			System.out.println("error" + e);
+		}
+		}
+		
+		else  {
+			
+			try {
+				String query ="INSERT INTO `entrepôts plaisance`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
+				PreparedStatement ps = con.prepareStatement(query);
+				ps.setString(1, txtMarque.getText() );
+				ps.setString(2, txtModele.getText() );
+				ps.setString(3, txtDate.getText() );
+				ps.setString(4, txtCouleur.getText() );
+				ps.setString(5, txtPrix.getText() );
+				ps.setString(6, txtQuantite.getText() );
+				ps.execute();
+	       
+			} catch (Exception e) {
+				System.out.println("error" + e);
+			}
+			}
 		}
 	
 	
