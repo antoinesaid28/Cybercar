@@ -4,21 +4,29 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+
+
 public class connexion extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -63,15 +71,40 @@ public class connexion extends JFrame {
 		lblNewLabel_1.setBounds(0, 0, 557, 507);
 		panel_1.add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(803, 252, 283, 40);
-		panel.add(textField);
-		textField.setColumns(10);
-		
 		JButton btnNewButton = new JButton("Connexion");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+					try {
+						String query = "SELECT * FROM `test` WHERE `identifient` =? and `MotDePasse` =?";
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+						PreparedStatement pst = con.prepareStatement(query);
+						pst.setString(1, textField.getText() );
+						pst.setString(2, passwordField.getText() );
+						ResultSet rs = pst.executeQuery();
+						
+						if (rs.next()) {
+							Commande com = new Commande();
+							com.setVisible(true);
+							dispose();
+							
+						}else {
+							JOptionPane.showMessageDialog(btnNewButton, " Identifient ou Mot de passe Invalid");
+						}
+
+					} catch (Exception e1) {
+						System.out.println("error" + e1);
+					}
+				
+//				String uname = textField.getText();
+//				String pass = passwordField.getText();
+				
+//				if (uname.equals("Username") && pass.equals("password")) {
+					
+					
+				
+				
 			}
 		});
 		btnNewButton.setBounds(828, 426, 200, 61);
@@ -95,9 +128,27 @@ public class connexion extends JFrame {
 		lblNewLabel_3.setBounds(796, 36, 232, 166);
 		panel.add(lblNewLabel_3);
 		
-		JPasswordField passwordField = new JPasswordField();
-		passwordField.setBounds(803, 328, 283, 40);
+		textField = new JTextField();
+		textField.setBounds(773, 252, 324, 40);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(773, 323, 324, 40);
 		panel.add(passwordField);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				utilisateur ut = new utilisateur();
+				ut.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton_1.setBounds(1045, 466, 85, 21);
+		panel.add(btnNewButton_1);
 	}
+	
 
+	
 }

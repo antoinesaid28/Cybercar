@@ -5,10 +5,14 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,6 +26,8 @@ import javax.swing.JTree;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Button;
+import javax.swing.JScrollPane;
 
 public class Commande extends JFrame {
 
@@ -67,57 +73,57 @@ public class Commande extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Marque");
-		lblNewLabel.setBounds(53, 135, 142, 34);
+		lblNewLabel.setBounds(53, 112, 142, 34);
 		panel.add(lblNewLabel);
 		
 		JLabel lblModele = new JLabel("Modele");
-		lblModele.setBounds(53, 199, 142, 34);
+		lblModele.setBounds(53, 179, 142, 34);
 		panel.add(lblModele);
 		
 		JLabel lblDateDeFabrication = new JLabel("Date de Fabrication");
-		lblDateDeFabrication.setBounds(53, 269, 142, 34);
+		lblDateDeFabrication.setBounds(53, 245, 142, 34);
 		panel.add(lblDateDeFabrication);
 		
 		JLabel lblCouleur = new JLabel("Couleur");
-		lblCouleur.setBounds(53, 345, 142, 34);
+		lblCouleur.setBounds(53, 310, 142, 34);
 		panel.add(lblCouleur);
 		
 		JLabel lblPrix = new JLabel("Prix");
-		lblPrix.setBounds(53, 434, 142, 34);
+		lblPrix.setBounds(53, 375, 142, 34);
 		panel.add(lblPrix);
 		
 		JLabel lblQuantite = new JLabel("Quantite");
-		lblQuantite.setBounds(53, 507, 142, 34);
+		lblQuantite.setBounds(53, 434, 142, 34);
 		panel.add(lblQuantite);
 		
 		txtMarque = new JTextField();
-		txtMarque.setBounds(178, 136, 201, 34);
+		txtMarque.setBounds(178, 113, 201, 34);
 		panel.add(txtMarque);
 		txtMarque.setColumns(10);
 		
 		txtModele = new JTextField();
 		txtModele.setColumns(10);
-		txtModele.setBounds(178, 200, 201, 34);
+		txtModele.setBounds(178, 180, 201, 34);
 		panel.add(txtModele);
 		
 		txtDate = new JTextField();
 		txtDate.setColumns(10);
-		txtDate.setBounds(178, 270, 201, 34);
+		txtDate.setBounds(178, 246, 201, 34);
 		panel.add(txtDate);
 		
 		txtCouleur = new JTextField();
 		txtCouleur.setColumns(10);
-		txtCouleur.setBounds(178, 346, 201, 34);
+		txtCouleur.setBounds(178, 311, 201, 34);
 		panel.add(txtCouleur);
 		
 		txtPrix = new JTextField();
 		txtPrix.setColumns(10);
-		txtPrix.setBounds(178, 435, 201, 34);
+		txtPrix.setBounds(178, 376, 201, 34);
 		panel.add(txtPrix);
 		
 		txtQuantite = new JTextField();
 		txtQuantite.setColumns(10);
-		txtQuantite.setBounds(178, 508, 201, 34);
+		txtQuantite.setBounds(178, 435, 201, 34);
 		panel.add(txtQuantite);
 		
 		JButton btnNewButton = new JButton("Commander");
@@ -135,9 +141,12 @@ public class Commande extends JFrame {
 		lblNewLabel_1.setBounds(308, 10, 554, 81);
 		panel.add(lblNewLabel_1);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(455, 113, 690, 306);
+		panel.add(scrollPane);
+		
 		table = new JTable();
-		table.setBounds(455, 113, 690, 306);
-		panel.add(table);
+		scrollPane.setViewportView(table);
 		
 		JButton btnNewButton_1 = new JButton("Modifier");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -151,9 +160,19 @@ public class Commande extends JFrame {
 		btnNewButton_1_1.setBounds(817, 434, 153, 34);
 		panel.add(btnNewButton_1_1);
 		
-		JButton btnNewButton_1_2 = new JButton("Mettre a Jour");
+		JButton btnNewButton_1_2 = new JButton("Afficher");
 		btnNewButton_1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					String query = "SELECT * FROM `gestiondestock`";
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+				PreparedStatement pst = con.prepareStatement(query);
+				ResultSet rs = pst.executeQuery();
+				table.setModel(DbUtils.resultSetToTableModel(rs));
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btnNewButton_1_2.setBounds(992, 434, 153, 34);
@@ -164,6 +183,10 @@ public class Commande extends JFrame {
 		comboBox.setToolTipText("");
 		comboBox.setBounds(956, 69, 175, 34);
 		panel.add(comboBox);
+		
+		JButton btnNewButton_1_3 = new JButton("Mise \u00E0  jour");
+		btnNewButton_1_3.setBounds(455, 434, 153, 34);
+		panel.add(btnNewButton_1_3);
 		
 	
 	}
