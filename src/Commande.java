@@ -126,15 +126,6 @@ public class Commande extends JFrame {
 		txtQuantite.setBounds(178, 435, 201, 34);
 		panel.add(txtQuantite);
 		
-		JButton btnNewButton = new JButton("Commander");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0 ) {
-				commande();
-			}
-		});
-		btnNewButton.setBounds(972, 539, 159, 41);
-		panel.add(btnNewButton);
-		
 		JLabel lblNewLabel_1 = new JLabel("Gestion de Stock");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -160,24 +151,6 @@ public class Commande extends JFrame {
 		btnNewButton_1_1.setBounds(817, 434, 153, 34);
 		panel.add(btnNewButton_1_1);
 		
-		JButton btnNewButton_1_2 = new JButton("Afficher");
-		btnNewButton_1_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					String query = "SELECT * FROM `gestiondestock`";
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
-				PreparedStatement pst = con.prepareStatement(query);
-				ResultSet rs = pst.executeQuery();
-				table.setModel(DbUtils.resultSetToTableModel(rs));
-				}catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				
-			}
-		});
-		btnNewButton_1_2.setBounds(992, 434, 153, 34);
-		panel.add(btnNewButton_1_2);
-		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Entrep\u00F4ts Port Louis", "Entrep\u00F4ts Baie du Tombeau", "Entrep\u00F4ts Phoenix", "Entrep\u00F4ts Plaisance"}));
 		comboBox.setToolTipText("");
@@ -187,6 +160,48 @@ public class Commande extends JFrame {
 		JButton btnNewButton_1_3 = new JButton("Mise \u00E0  jour");
 		btnNewButton_1_3.setBounds(455, 434, 153, 34);
 		panel.add(btnNewButton_1_3);
+		
+		JButton btnNewButton_2 = new JButton("Afficher");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (comboBox.getSelectedItem() == "Entrepôts Port Louis") {
+				try {
+					String query = "SELECT * FROM `gestiondestock`";
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+				PreparedStatement pst = con.prepareStatement(query);
+				ResultSet rs = pst.executeQuery();
+				table.setModel(DbUtils.resultSetToTableModel(rs));
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+				
+	///			             ////                                                  ///////
+				
+				else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau"){
+				try {
+					String query = "SELECT * FROM `entrepôts_baie_du_tombeau`";
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+				PreparedStatement pst = con.prepareStatement(query);
+				ResultSet rs = pst.executeQuery();
+				table.setModel(DbUtils.resultSetToTableModel(rs));
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+			}
+		});
+		btnNewButton_2.setBounds(980, 434, 151, 34);
+		panel.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("commander");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				commande(comboBox);	
+				
+		}});
+		btnNewButton_3.setBounds(982, 510, 163, 40);
+		panel.add(btnNewButton_3);
 		
 	
 	}
@@ -203,8 +218,9 @@ public class Commande extends JFrame {
 		return null;
 	}
 	
-	private void commande() {
+	private void commande(JComboBox comboBox) {
 		Connection con = (Connection) con();
+		if (comboBox.getSelectedItem() == "Entrepôts Port Louis") {
 		try {
 			String query = "INSERT INTO `gestiondestock`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(query);
@@ -215,10 +231,32 @@ public class Commande extends JFrame {
 			ps.setString(5, txtPrix.getText() );
 			ps.setString(6, txtQuantite.getText() );
 			ps.execute();
-
+       
 		} catch (Exception e) {
 			System.out.println("error" + e);
 		}
+		}
+	
+		else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau") {
+				
+		try {
+			String query ="INSERT INTO `entrepôts_baie_du_tombeau`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, txtMarque.getText() );
+			ps.setString(2, txtModele.getText() );
+			ps.setString(3, txtDate.getText() );
+			ps.setString(4, txtCouleur.getText() );
+			ps.setString(5, txtPrix.getText() );
+			ps.setString(6, txtQuantite.getText() );
+			ps.execute();
+       
+		} catch (Exception e) {
+			System.out.println("error" + e);
+		}
+		}
+		}
+	
+	
 	}
-}
+
 

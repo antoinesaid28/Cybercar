@@ -88,6 +88,7 @@ public class connexion extends JFrame {
 							Commande com = new Commande();
 							com.setVisible(true);
 							dispose();
+							JOptionPane.showMessageDialog(btnNewButton, " connexion reussi avec succer");
 							
 						}else {
 							JOptionPane.showMessageDialog(btnNewButton, " Identifient ou Mot de passe Invalid");
