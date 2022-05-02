@@ -245,6 +245,7 @@ public class Commande extends JFrame {
 	private void commande(JComboBox comboBox) {
 		Connection con = (Connection) con();
 		if (comboBox.getSelectedItem() == "Entrepôts Port Louis") {
+			System.out.println("je suis la p");
 		try {
 			String query = "INSERT INTO `gestiondestock`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(query);
@@ -263,7 +264,7 @@ public class Commande extends JFrame {
 		
 		}
 	
-		else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau") {
+		else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau") {System.out.println("je suis la t");
 				
 		try {
 			String query ="INSERT INTO `entrepôts_baie_du_tombeau`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
@@ -281,7 +282,8 @@ public class Commande extends JFrame {
 		}
 		}
 
-		else if (comboBox.getSelectedItem() == "entrepôts phoenix") {
+		else if (comboBox.getSelectedItem() == "Entrepôts Phoenix") {
+			System.out.println("je suis la p");
 				
 		try {
 			String query ="INSERT INTO `entrepôts phoenix`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
