@@ -222,6 +222,12 @@ public class Commande extends JFrame {
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				commande(comboBox);	
+				txtMarque.setText(null);
+				txtModele.setText(null);
+				txtDate.setText(null);
+				txtCouleur.setText(null);
+				txtPrix.setText(null);
+				txtQuantite.setText(null);
 				
 		}});
 		btnNewButton_3.setBounds(982, 510, 163, 40);

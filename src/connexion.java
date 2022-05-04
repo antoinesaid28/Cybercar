@@ -193,7 +193,7 @@ public class connexion extends JFrame {
 		passwordField.setBounds(773, 323, 324, 40);
 		panel.add(passwordField);
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton btnNewButton_1 = new JButton("Ajouter User");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				utilisateur ut = new utilisateur();
@@ -203,7 +203,7 @@ public class connexion extends JFrame {
 		});
 		
 		
-		btnNewButton_1.setBounds(1045, 466, 85, 21);
+		btnNewButton_1.setBounds(1039, 466, 91, 21);
 		panel.add(btnNewButton_1);
 	}
 	
