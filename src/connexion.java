@@ -163,13 +163,13 @@ public class connexion extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(828, 426, 200, 61);
+		btnNewButton.setBounds(796, 426, 200, 61);
 		panel.add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Identifient");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(609, 252, 184, 40);
+		lblNewLabel.setBounds(594, 247, 184, 40);
 		panel.add(lblNewLabel);
 		
 		JLabel lblMotDePasse = new JLabel("Mot de Passe");
@@ -181,7 +181,7 @@ public class connexion extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Antoine\\Downloads\\Capture_d_\u00E9cran_2022-04-13_123051-removebg-preview.png"));
-		lblNewLabel_3.setBounds(796, 36, 232, 166);
+		lblNewLabel_3.setBounds(787, 37, 232, 166);
 		panel.add(lblNewLabel_3);
 		
 		textField = new JTextField();
@@ -203,7 +203,7 @@ public class connexion extends JFrame {
 		});
 		
 		
-		btnNewButton_1.setBounds(1039, 466, 91, 21);
+		btnNewButton_1.setBounds(1022, 466, 108, 21);
 		panel.add(btnNewButton_1);
 	}
 	
