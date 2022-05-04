@@ -81,6 +81,11 @@ public class connexion extends JFrame {
 		JButton btnNewButton = new JButton("Connexion");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.addActionListener(new ActionListener() {
+			
+			/**
+			 * 
+			 * @param e
+			 */
 			public void actionPerformed(ActionEvent e) {
 				if (comboBox.getSelectedItem() == "Admin") {
 					try {
