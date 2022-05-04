@@ -19,6 +19,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 
 
@@ -71,13 +73,18 @@ public class connexion extends JFrame {
 		lblNewLabel_1.setBounds(0, 0, 557, 507);
 		panel_1.add(lblNewLabel_1);
 		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Admin", "RH", "Vente"}));
+		comboBox.setBounds(609, 450, 124, 21);
+		panel.add(comboBox);
+		
 		JButton btnNewButton = new JButton("Connexion");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if (comboBox.getSelectedItem() == "Admin") {
 					try {
-						String query = "SELECT * FROM `test` WHERE `identifient` =? and `MotDePasse` =?";
+						String query = "SELECT * FROM `admin` WHERE `Mail` =? and `Password` =?";
 						Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
 						PreparedStatement pst = con.prepareStatement(query);
 						pst.setString(1, textField.getText() );
@@ -97,6 +104,54 @@ public class connexion extends JFrame {
 					} catch (Exception e1) {
 						System.out.println("error" + e1);
 					}
+				}
+				else if (comboBox.getSelectedItem() == "RH") {
+					try {
+						String query = "SELECT * FROM `rh` WHERE `Mail` =? and `Password` =?";
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+						PreparedStatement pst = con.prepareStatement(query);
+						pst.setString(1, textField.getText() );
+						pst.setString(2, passwordField.getText() );
+						ResultSet rs = pst.executeQuery();
+						
+						if (rs.next()) {
+							RH com = new RH();
+							com.setVisible(true);
+							dispose();
+							JOptionPane.showMessageDialog(btnNewButton, " connexion reussi avec succer");
+							
+						}else {
+							JOptionPane.showMessageDialog(btnNewButton, " Identifient ou Mot de passe Invalid");
+						}
+
+					} catch (Exception e1) {
+						System.out.println("error" + e1);
+					}
+				}
+				
+				else {
+					try {
+						String query = "SELECT * FROM `vente` WHERE `Mail` =? and `Password` =?";
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+						PreparedStatement pst = con.prepareStatement(query);
+						pst.setString(1, textField.getText() );
+						pst.setString(2, passwordField.getText() );
+						ResultSet rs = pst.executeQuery();
+						
+						if (rs.next()) {
+							Vente com = new Vente();
+							com.setVisible(true);
+							dispose();
+							JOptionPane.showMessageDialog(btnNewButton, " connexion reussi avec succer");
+							
+						}else {
+							JOptionPane.showMessageDialog(btnNewButton, " Identifient ou Mot de passe Invalid");
+						}
+
+					} catch (Exception e1) {
+						System.out.println("error" + e1);
+					}
+				}
 				
 //				String uname = textField.getText();
 //				String pass = passwordField.getText();
@@ -146,6 +201,8 @@ public class connexion extends JFrame {
 				dispose();
 			}
 		});
+		
+		
 		btnNewButton_1.setBounds(1045, 466, 85, 21);
 		panel.add(btnNewButton_1);
 	}

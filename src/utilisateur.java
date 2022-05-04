@@ -129,7 +129,12 @@ public class utilisateur extends JFrame {
 		JButton btnNewButton = new JButton("Ajouter");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				utilisateur();
+				utilisateur(comboBox);
+				txtNom.setText(null);
+				txtPrenom.setText(null);
+				txtMail.setText(null);
+				passwordField.setText(null);
+				
 				
 		
 			}
@@ -150,20 +155,54 @@ public class utilisateur extends JFrame {
 		return null;
 	}
 	
-	private void utilisateur() {
+	private void utilisateur(JComboBox comboBox) {
 		Connection con = (Connection) con();
+		if (comboBox.getSelectedItem() == "Admin") {
 		try {
 			String query = "INSERT INTO `admin`(`Nom`, `Prenom`, `Sex`, `Mail`, `Password`) VALUES (?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, txtNom.getText() );
 			ps.setString(2, txtPrenom.getText() );
-			ps.setString(3, txtMail.getText() );
-			ps.setString(4, passwordField.getText() );
-			ps.setString(5,sexe);
+			ps.setString(3, sexe);
+			ps.setString(4, txtMail.getText() );
+			ps.setString(5,passwordField.getText());
 			ps.execute();
        
 		} catch (Exception e) {
 			System.out.println("error" + e);
 		}
+	}
+		else if (comboBox.getSelectedItem() == "RH") {
+			try {
+				String query = "INSERT INTO `rh`(`Nom`, `Prenom`, `Sex`, `Mail`, `Password`) VALUES (?,?,?,?,?)";
+				PreparedStatement ps = con.prepareStatement(query);
+				ps.setString(1, txtNom.getText() );
+				ps.setString(2, txtPrenom.getText() );
+				ps.setString(3, sexe);
+				ps.setString(4, txtMail.getText() );
+				ps.setString(5,passwordField.getText());
+				ps.execute();
+	       
+			} catch (Exception e) {
+				System.out.println("error" + e);
+			}
+		}
+		
+		else{
+			try {
+				String query = "INSERT INTO `vente`(`Nom`, `Prenom`, `Sex`, `Mail`, `Password`) VALUES (?,?,?,?,?)";
+				PreparedStatement ps = con.prepareStatement(query);
+				ps.setString(1, txtNom.getText() );
+				ps.setString(2, txtPrenom.getText() );
+				ps.setString(3, sexe);
+				ps.setString(4, txtMail.getText() );
+				ps.setString(5,passwordField.getText());
+				ps.execute();
+	       
+			} catch (Exception e) {
+				System.out.println("error" + e);
+			}
+		}
+		
 	}
 }
