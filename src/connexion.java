@@ -24,14 +24,25 @@ import javax.swing.DefaultComboBoxModel;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class connexion.
+ */
 public class connexion extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The text field. */
 	private JTextField textField;
+	
+	/** The password field. */
 	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -83,8 +94,9 @@ public class connexion extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			
 			/**
-			 * 
-			 * @param e
+			 * Action performed.
+			 *
+			 * @param e the e
 			 */
 			public void actionPerformed(ActionEvent e) {
 				if (comboBox.getSelectedItem() == "Admin") {
@@ -95,7 +107,6 @@ public class connexion extends JFrame {
 						pst.setString(1, textField.getText() );
 						pst.setString(2, passwordField.getText() );
 						ResultSet rs = pst.executeQuery();
-						
 						if (rs.next()) {
 							Commande com = new Commande();
 							com.setVisible(true);
@@ -157,16 +168,7 @@ public class connexion extends JFrame {
 						System.out.println("error" + e1);
 					}
 				}
-				
-//				String uname = textField.getText();
-//				String pass = passwordField.getText();
-				
-//				if (uname.equals("Username") && pass.equals("password")) {
-					
-					
-				
-				
-			}
+					}
 		});
 		btnNewButton.setBounds(796, 426, 200, 61);
 		panel.add(btnNewButton);
