@@ -164,6 +164,7 @@ public class Commande extends JFrame {
 		JButton btnNewButton_2 = new JButton("Afficher");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				if (comboBox.getSelectedItem() == "Entrepôts Port Louis") {
 				try {
 					String query = "SELECT * FROM `gestiondestock`";
@@ -175,9 +176,6 @@ public class Commande extends JFrame {
 					e1.printStackTrace();
 				}
 			}
-				
-	///			             ////                                                  ///////
-				
 				else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau"){
 				try {
 					String query = "SELECT * FROM `entrepôts_baie_du_tombeau`";
