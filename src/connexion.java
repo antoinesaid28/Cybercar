@@ -168,6 +168,9 @@ public class connexion extends JFrame {
 						System.out.println("error" + e1);
 					}
 				}
+				
+				textField.setText(null);
+				passwordField.setText(null);
 					}
 		});
 		btnNewButton.setBounds(796, 426, 200, 61);
