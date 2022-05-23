@@ -148,6 +148,12 @@ public class Commande extends JFrame {
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Suprimer");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i=table.getSelectedRow();
+				
+			}
+		});
 		btnNewButton_1_1.setBounds(817, 434, 153, 34);
 		panel.add(btnNewButton_1_1);
 		
