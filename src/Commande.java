@@ -219,6 +219,12 @@ public class Commande extends JFrame {
 		JButton btnNewButton_3 = new JButton("commander");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(txtMarque.getText().equals("")|| txtModele.getText().equals("")|| txtDate.getText().equals("")|| txtCouleur.getText().equals("")|| txtPrix.getText().equals("")|| txtQuantite.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "les iformation saisi sont pas complet");
+				}
+				else {
+					
+			
 				commande(comboBox);	
 				txtMarque.setText(null);
 				txtModele.setText(null);
@@ -226,6 +232,8 @@ public class Commande extends JFrame {
 				txtCouleur.setText(null);
 				txtPrix.setText(null);
 				txtQuantite.setText(null);
+				JOptionPane.showMessageDialog(null, "les iformation saisi sont enregistrer");
+				}
 				
 		}});
 		btnNewButton_3.setBounds(982, 510, 163, 40);
