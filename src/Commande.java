@@ -28,6 +28,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Button;
 import javax.swing.JScrollPane;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class Commande extends JFrame {
 
@@ -39,6 +41,7 @@ public class Commande extends JFrame {
 	private JTextField txtPrix;
 	private JTextField txtQuantite;
 	private JTable table;
+	private JTextField txtId;
 
 	/**
 	 * Launch the application.
@@ -129,7 +132,7 @@ public class Commande extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Gestion de Stock");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(308, 10, 554, 81);
+		lblNewLabel_1.setBounds(332, 10, 554, 81);
 		panel.add(lblNewLabel_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -137,25 +140,8 @@ public class Commande extends JFrame {
 		panel.add(scrollPane);
 		
 		table = new JTable();
+		table.setBackground(SystemColor.inactiveCaption);
 		scrollPane.setViewportView(table);
-		
-		JButton btnNewButton_1 = new JButton("Modifier");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1.setBounds(636, 434, 153, 34);
-		panel.add(btnNewButton_1);
-		
-		JButton btnNewButton_1_1 = new JButton("Suprimer");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int i=table.getSelectedRow();
-				
-			}
-		});
-		btnNewButton_1_1.setBounds(817, 434, 153, 34);
-		panel.add(btnNewButton_1_1);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Entrep\u00F4ts Port Louis", "Entrep\u00F4ts Baie du Tombeau", "Entrep\u00F4ts Phoenix", "Entrep\u00F4ts Plaisance"}));
@@ -170,6 +156,9 @@ public class Commande extends JFrame {
 		JButton btnNewButton_2 = new JButton("Afficher");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/**
+				 * 
+				 */
 				
 				if (comboBox.getSelectedItem() == "Entrepôts Port Louis") {
 				try {
@@ -225,12 +214,14 @@ public class Commande extends JFrame {
 		JButton btnNewButton_3 = new JButton("commander");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/**
+				 * 
+				 */
 				if(txtMarque.getText().equals("")|| txtModele.getText().equals("")|| txtDate.getText().equals("")|| txtCouleur.getText().equals("")|| txtPrix.getText().equals("")|| txtQuantite.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "les iformation saisi sont pas complet");
+					JOptionPane.showMessageDialog(null, "les information saisi sont pas complet");
 				}
 				else {
 					
-			
 				commande(comboBox);	
 				txtMarque.setText(null);
 				txtModele.setText(null);
@@ -238,16 +229,88 @@ public class Commande extends JFrame {
 				txtCouleur.setText(null);
 				txtPrix.setText(null);
 				txtQuantite.setText(null);
-				JOptionPane.showMessageDialog(null, "les iformation saisi sont enregistrer");
+				JOptionPane.showMessageDialog(null, "Commande enregistrer");
 				}
 				
 		}});
 		btnNewButton_3.setBounds(982, 510, 163, 40);
 		panel.add(btnNewButton_3);
 		
+		txtId = new JTextField();
+		txtId.setBounds(501, 77, 96, 26);
+		panel.add(txtId);
+		txtId.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("ID");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(446, 78, 57, 25);
+		panel.add(lblNewLabel_2);
+		
+		JButton btnNewButton_1_1 = new JButton("Suprimer");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				/**
+				 * 
+				 */
+			try {
+					String query = "DELETE FROM `entrepôts plaisance` WHERE ID =?";
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+				PreparedStatement pst = con.prepareStatement(query);
+				pst.setString(1, txtId.getText() );
+				pst.executeUpdate();
+				con.close();
+				JOptionPane.showMessageDialog(null, "la ligne"+"");
+				
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			txtId.setText(null);
+			}
+		});
+		btnNewButton_1_1.setBounds(817, 434, 153, 34);
+		panel.add(btnNewButton_1_1);
+		
+		JButton btnNewButton_1 = new JButton("Modifier");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+/**
+ * 
+ */
+				try {
+					String query = "UPDATE `entrepôts plaisance` SET `Marque`=?,`Modèle`=?,`Date de Fabrication`=?,`Couleur`=?,`Prix`=?,`Quantité`=? WHERE ID = ?";
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+				PreparedStatement pst = con.prepareStatement(query);
+				
+	          
+				
+				pst.setString(1, txtMarque.getText());
+				pst.setString(2, txtModele.getText() );
+				pst.setString(3, txtDate.getText() );
+				pst.setString(4, txtCouleur.getText() );
+				pst.setString(5, txtPrix.getText() );
+				pst.setString(6, txtQuantite.getText() );
+				pst.setString(7, txtId.getText() );
+				pst.executeUpdate();
+				con.close();
+				JOptionPane.showMessageDialog(null, "la ligne"+"");
+				
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_1.setBounds(642, 434, 153, 34);
+		panel.add(btnNewButton_1);
+		
 	
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	static Connection con () {
 		try {
 			String drive ="com.mysql.jdbc.Driver";
@@ -265,7 +328,7 @@ public class Commande extends JFrame {
 		if (comboBox.getSelectedItem() == "Entrepôts Port Louis") {
 			System.out.println("je suis la p");
 		try {
-			String query = "INSERT INTO `gestiondestock`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
+			String query = "INSERT INTO `gestiondestock`(`Marque`, `Modèle`, `Date de Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, txtMarque.getText() );
 			ps.setString(2, txtModele.getText() );
@@ -285,7 +348,7 @@ public class Commande extends JFrame {
 		else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau") {System.out.println("je suis la t");
 				
 		try {
-			String query ="INSERT INTO `entrepôts_baie_du_tombeau`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
+			String query ="INSERT INTO `entrepôts_baie_du_tombeau`(`Marque`, `Modèle`, `Date de Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, txtMarque.getText() );
 			ps.setString(2, txtModele.getText() );
@@ -304,7 +367,7 @@ public class Commande extends JFrame {
 			System.out.println("je suis la p");
 				
 		try {
-			String query ="INSERT INTO `entrepôts phoenix`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
+			String query ="INSERT INTO `entrepôts phoenix`(`Marque`, `Modèle`, `Date de Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, txtMarque.getText() );
 			ps.setString(2, txtModele.getText() );
@@ -316,13 +379,14 @@ public class Commande extends JFrame {
        
 		} catch (Exception e) {
 			System.out.println("error" + e);
+			JOptionPane.showMessageDialog(null, "erreur ce trouve ici "+e.getMessage());
 		}
 		}
 		
 		else  {
 			
 			try {
-				String query ="INSERT INTO `entrepôts plaisance`(`Marque`, `Modèle`, `Date_de_Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
+				String query ="INSERT INTO `entrepôts plaisance`(`Marque`, `Modèle`, `Date de Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
 				PreparedStatement ps = con.prepareStatement(query);
 				ps.setString(1, txtMarque.getText() );
 				ps.setString(2, txtModele.getText() );
@@ -337,8 +401,6 @@ public class Commande extends JFrame {
 			}
 			}
 		}
-	
-	
 	}
 
 
