@@ -6,10 +6,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelListener;
 
 import net.proteanit.sql.DbUtils;
 
@@ -30,18 +32,23 @@ import java.awt.Button;
 import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import com.toedter.components.JLocaleChooser;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.components.JSpinField;
 
 public class Commande extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtMarque;
 	private JTextField txtModele;
-	private JTextField txtDate;
 	private JTextField txtCouleur;
 	private JTextField txtPrix;
 	private JTextField txtQuantite;
 	private JTable table;
 	private JTextField txtId;
+	private JDateChooser Antoine;
 
 	/**
 	 * Launch the application.
@@ -109,10 +116,11 @@ public class Commande extends JFrame {
 		txtModele.setBounds(178, 180, 201, 34);
 		panel.add(txtModele);
 		
-		txtDate = new JTextField();
-		txtDate.setColumns(10);
-		txtDate.setBounds(178, 246, 201, 34);
-		panel.add(txtDate);
+		Antoine = new JDateChooser();
+		Antoine.setBounds(178, 245, 201, 34);
+		panel.add(Antoine);
+		
+	
 		
 		txtCouleur = new JTextField();
 		txtCouleur.setColumns(10);
@@ -136,10 +144,18 @@ public class Commande extends JFrame {
 		panel.add(lblNewLabel_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			}
+		});
 		scrollPane.setBounds(455, 113, 690, 306);
 		panel.add(scrollPane);
 		
 		table = new JTable();
+
 		table.setBackground(SystemColor.inactiveCaption);
 		scrollPane.setViewportView(table);
 		
@@ -150,6 +166,10 @@ public class Commande extends JFrame {
 		panel.add(comboBox);
 		
 		JButton btnNewButton_1_3 = new JButton("Mise \u00E0  jour");
+		btnNewButton_1_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1_3.setBounds(455, 434, 153, 34);
 		panel.add(btnNewButton_1_3);
 		
@@ -217,7 +237,7 @@ public class Commande extends JFrame {
 				/**
 				 * 
 				 */
-				if(txtMarque.getText().equals("")|| txtModele.getText().equals("")|| txtDate.getText().equals("")|| txtCouleur.getText().equals("")|| txtPrix.getText().equals("")|| txtQuantite.getText().equals("")) {
+				if(txtMarque.getText().equals("")|| txtModele.getText().equals("")|| Antoine.equals("")|| txtCouleur.getText().equals("")|| txtPrix.getText().equals("")|| txtQuantite.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "les information saisi sont pas complet");
 				}
 				else {
@@ -225,7 +245,7 @@ public class Commande extends JFrame {
 				commande(comboBox);	
 				txtMarque.setText(null);
 				txtModele.setText(null);
-				txtDate.setText(null);
+				//txtDate.setText(null);
 				txtCouleur.setText(null);
 				txtPrix.setText(null);
 				txtQuantite.setText(null);
@@ -250,12 +270,13 @@ public class Commande extends JFrame {
 		JButton btnNewButton_1_1 = new JButton("Suprimer");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+//******************************************************************************************************************************************				
 				/**
 				 * 
 				 */
+				if (comboBox.getSelectedItem() == "Entrepôts Port Louis") {
 			try {
-					String query = "DELETE FROM `entrepôts plaisance` WHERE ID =?";
+					String query = "DELETE FROM `gestiondestock` WHERE ID =?";
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
 				PreparedStatement pst = con.prepareStatement(query);
 				pst.setString(1, txtId.getText() );
@@ -266,7 +287,51 @@ public class Commande extends JFrame {
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}
+				}
+				else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau") {
+					try {
+						String query = "DELETE FROM `entrepôts_baie_du_tombeau` WHERE ID =?";
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+					PreparedStatement pst = con.prepareStatement(query);
+					pst.setString(1, txtId.getText() );
+					pst.executeUpdate();
+					con.close();
+					JOptionPane.showMessageDialog(null, "la ligne"+"");
+					
+					}catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+				else if (comboBox.getSelectedItem() == "Entrepôts Phoenix") {
+					try {
+						String query = "DELETE FROM `entrepôts phoenix` WHERE ID =?";
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+					PreparedStatement pst = con.prepareStatement(query);
+					pst.setString(1, txtId.getText() );
+					pst.executeUpdate();
+					con.close();
+					JOptionPane.showMessageDialog(null, "la ligne"+"");
+					
+					}catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+				else  {
+					try {
+						String query = "DELETE FROM `entrepôts plaisance` WHERE ID =?";
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+					PreparedStatement pst = con.prepareStatement(query);
+					pst.setString(1, txtId.getText() );
+					pst.executeUpdate();
+					con.close();
+					JOptionPane.showMessageDialog(null, "la ligne"+"");
+					
+					}catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
 			txtId.setText(null);
+//**********************************************************************************************************************************************			
 			}
 		});
 		btnNewButton_1_1.setBounds(817, 434, 153, 34);
@@ -305,7 +370,11 @@ public class Commande extends JFrame {
 		btnNewButton_1.setBounds(642, 434, 153, 34);
 		panel.add(btnNewButton_1);
 		
-	
+		JSpinField spinField = new JSpinField();
+		spinField.setBounds(96, 531, 112, 19);
+		panel.add(spinField);
+		
+		
 	}
 	/**
 	 * 
@@ -332,7 +401,9 @@ public class Commande extends JFrame {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, txtMarque.getText() );
 			ps.setString(2, txtModele.getText() );
-			ps.setString(3, txtDate.getText() );
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String date = sdf.format( Antoine .getDate());
+			ps.setString(3, date );
 			ps.setString(4, txtCouleur.getText() );
 			ps.setString(5, txtPrix.getText() );
 			ps.setString(6, txtQuantite.getText() );
@@ -352,11 +423,14 @@ public class Commande extends JFrame {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, txtMarque.getText() );
 			ps.setString(2, txtModele.getText() );
-			ps.setString(3, txtDate.getText() );
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String date = sdf.format( Antoine .getDate());
+			ps.setString(3, date );
 			ps.setString(4, txtCouleur.getText() );
 			ps.setString(5, txtPrix.getText() );
 			ps.setString(6, txtQuantite.getText() );
 			ps.execute();
+       
        
 		} catch (Exception e) {
 			System.out.println("error" + e);
@@ -371,7 +445,9 @@ public class Commande extends JFrame {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, txtMarque.getText() );
 			ps.setString(2, txtModele.getText() );
-			ps.setString(3, txtDate.getText() );
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String date = sdf.format( Antoine .getDate());
+			ps.setString(3, date );
 			ps.setString(4, txtCouleur.getText() );
 			ps.setString(5, txtPrix.getText() );
 			ps.setString(6, txtQuantite.getText() );
@@ -390,11 +466,14 @@ public class Commande extends JFrame {
 				PreparedStatement ps = con.prepareStatement(query);
 				ps.setString(1, txtMarque.getText() );
 				ps.setString(2, txtModele.getText() );
-				ps.setString(3, txtDate.getText() );
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+				String date = sdf.format( Antoine .getDate());
+				ps.setString(3, date );
 				ps.setString(4, txtCouleur.getText() );
 				ps.setString(5, txtPrix.getText() );
 				ps.setString(6, txtQuantite.getText() );
 				ps.execute();
+	       
 	       
 			} catch (Exception e) {
 				System.out.println("error" + e);
