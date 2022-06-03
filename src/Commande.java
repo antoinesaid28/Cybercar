@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.TableModelListener;
 
 import net.proteanit.sql.DbUtils;
+import suprim.suprimer;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -245,7 +246,7 @@ public class Commande extends JFrame {
 				commande(comboBox);	
 				txtMarque.setText(null);
 				txtModele.setText(null);
-				//txtDate.setText(null);
+				Antoine.setDate(null);
 				txtCouleur.setText(null);
 				txtPrix.setText(null);
 				txtQuantite.setText(null);
@@ -274,6 +275,8 @@ public class Commande extends JFrame {
 				/**
 				 * 
 				 */
+				
+				
 				if (comboBox.getSelectedItem() == "Entrepôts Port Louis") {
 			try {
 					String query = "DELETE FROM `gestiondestock` WHERE ID =?";
@@ -353,7 +356,7 @@ public class Commande extends JFrame {
 				
 				pst.setString(1, txtMarque.getText());
 				pst.setString(2, txtModele.getText() );
-				pst.setString(3, txtDate.getText() );
+				pst.setString(3, Antoine.getDate() );
 				pst.setString(4, txtCouleur.getText() );
 				pst.setString(5, txtPrix.getText() );
 				pst.setString(6, txtQuantite.getText() );
@@ -416,7 +419,7 @@ public class Commande extends JFrame {
 		
 		}
 	
-		else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau") {System.out.println("je suis la t");
+		else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau") {
 				
 		try {
 			String query ="INSERT INTO `entrepôts_baie_du_tombeau`(`Marque`, `Modèle`, `Date de Fabrication`, `Couleur`, `Prix`,`Quantité`) VALUES (?,?,?,?,?,?)";
