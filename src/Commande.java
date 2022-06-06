@@ -38,6 +38,9 @@ import java.awt.event.MouseEvent;
 import com.toedter.components.JLocaleChooser;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.components.JSpinField;
+import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Commande extends JFrame {
 
@@ -50,6 +53,7 @@ public class Commande extends JFrame {
 	private JTable table;
 	private JTextField txtId;
 	private JDateChooser Antoine;
+	private JSpinField quantite;
 
 	/**
 	 * Launch the application.
@@ -83,65 +87,79 @@ public class Commande extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Marque");
+		JLabel lblNewLabel = new JLabel("Marque :");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel.setBounds(53, 112, 142, 34);
 		panel.add(lblNewLabel);
 		
-		JLabel lblModele = new JLabel("Modele");
+		JLabel lblModele = new JLabel("Modele :");
+		lblModele.setForeground(Color.WHITE);
+		lblModele.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblModele.setBounds(53, 179, 142, 34);
 		panel.add(lblModele);
 		
-		JLabel lblDateDeFabrication = new JLabel("Date de Fabrication");
-		lblDateDeFabrication.setBounds(53, 245, 142, 34);
+		JLabel lblDateDeFabrication = new JLabel("Date de Fabrication :");
+		lblDateDeFabrication.setForeground(Color.WHITE);
+		lblDateDeFabrication.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblDateDeFabrication.setBounds(53, 245, 163, 34);
 		panel.add(lblDateDeFabrication);
 		
-		JLabel lblCouleur = new JLabel("Couleur");
+		JLabel lblCouleur = new JLabel("Couleur :");
+		lblCouleur.setForeground(Color.WHITE);
+		lblCouleur.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblCouleur.setBounds(53, 310, 142, 34);
 		panel.add(lblCouleur);
 		
-		JLabel lblPrix = new JLabel("Prix");
+		JLabel lblPrix = new JLabel("Prix :");
+		lblPrix.setForeground(Color.WHITE);
+		lblPrix.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblPrix.setBounds(53, 375, 142, 34);
 		panel.add(lblPrix);
 		
-		JLabel lblQuantite = new JLabel("Quantite");
+		JLabel lblQuantite = new JLabel("Quantite :");
+		lblQuantite.setForeground(Color.WHITE);
+		lblQuantite.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblQuantite.setBounds(53, 434, 142, 34);
 		panel.add(lblQuantite);
 		
 		txtMarque = new JTextField();
-		txtMarque.setBounds(178, 113, 201, 34);
+		txtMarque.setBounds(226, 116, 201, 34);
 		panel.add(txtMarque);
 		txtMarque.setColumns(10);
 		
 		txtModele = new JTextField();
 		txtModele.setColumns(10);
-		txtModele.setBounds(178, 180, 201, 34);
+		txtModele.setBounds(226, 183, 201, 34);
 		panel.add(txtModele);
 		
 		Antoine = new JDateChooser();
-		Antoine.setBounds(178, 245, 201, 34);
+		Antoine.setBounds(226, 245, 201, 34);
 		panel.add(Antoine);
 		
 	
 		
 		txtCouleur = new JTextField();
 		txtCouleur.setColumns(10);
-		txtCouleur.setBounds(178, 311, 201, 34);
+		txtCouleur.setBounds(226, 311, 201, 34);
 		panel.add(txtCouleur);
 		
 		txtPrix = new JTextField();
 		txtPrix.setColumns(10);
-		txtPrix.setBounds(178, 376, 201, 34);
+		txtPrix.setBounds(226, 376, 201, 34);
 		panel.add(txtPrix);
 		
 		txtQuantite = new JTextField();
 		txtQuantite.setColumns(10);
-		txtQuantite.setBounds(178, 435, 201, 34);
+		txtQuantite.setBounds(226, 435, 201, 34);
 		panel.add(txtQuantite);
 		
-		JLabel lblNewLabel_1 = new JLabel("Gestion de Stock");
+		JLabel lblNewLabel_1 = new JLabel("GESTION DE STOCK");
+		lblNewLabel_1.setForeground(Color.BLACK);
+		lblNewLabel_1.setBackground(Color.GRAY);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(332, 10, 554, 81);
+		lblNewLabel_1.setBounds(0, 0, 1168, 75);
 		panel.add(lblNewLabel_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -161,20 +179,14 @@ public class Commande extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Entrep\u00F4ts Port Louis", "Entrep\u00F4ts Baie du Tombeau", "Entrep\u00F4ts Phoenix", "Entrep\u00F4ts Plaisance"}));
 		comboBox.setToolTipText("");
-		comboBox.setBounds(956, 69, 175, 34);
+		comboBox.setBounds(970, 85, 175, 26);
 		panel.add(comboBox);
 		
-		JButton btnNewButton_1_3 = new JButton("Mise \u00E0  jour");
-		btnNewButton_1_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1_3.setBounds(455, 434, 153, 34);
-		panel.add(btnNewButton_1_3);
-		
 		JButton btnNewButton_2 = new JButton("Afficher");
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/**
@@ -233,6 +245,7 @@ public class Commande extends JFrame {
 		panel.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("commander");
+		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/**
@@ -258,17 +271,132 @@ public class Commande extends JFrame {
 		panel.add(btnNewButton_3);
 		
 		txtId = new JTextField();
-		txtId.setBounds(501, 77, 96, 26);
+		txtId.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) 
+			{
+				
+				if (comboBox.getSelectedItem() == "Entrepôts Port Louis") {
+					try {
+						String query = "SELECT * FROM `gestiondestock` where id  = ?";
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+					PreparedStatement pst = con.prepareStatement(query);
+					pst.setString(1,txtId.getText());
+					
+					ResultSet rs = pst.executeQuery();
+					
+					if(rs.next())
+					{
+						txtMarque.setText(rs.getString("Marque"));
+						txtModele.setText(rs.getString("Modèle"));
+						Antoine.setDate(rs.getDate("Date de Fabrication"));
+						txtCouleur.setText(rs.getString("Couleur"));
+						txtPrix.setText(rs.getString("Prix"));
+						txtQuantite.setText(rs.getString("Quantité"));
+					}
+					
+					
+					}catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau") {
+					try {
+						String query = "SELECT * FROM `entrepôts_baie_du_tombeau` where id  = ?";
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+					PreparedStatement pst = con.prepareStatement(query);
+					pst.setString(1,txtId.getText());
+					
+					ResultSet rs = pst.executeQuery();
+					
+					if(rs.next())
+					{
+						txtMarque.setText(rs.getString("Marque"));
+						txtModele.setText(rs.getString("Modèle"));
+						Antoine.setDate(rs.getDate("Date de Fabrication"));
+						txtCouleur.setText(rs.getString("Couleur"));
+						txtPrix.setText(rs.getString("Prix"));
+						txtQuantite.setText(rs.getString("Quantité"));
+					}
+					
+					
+					}catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}else if (comboBox.getSelectedItem() == "Entrepôts Phoenix") {
+					try {
+						String query = "SELECT * FROM `entrepôts phoenix` where id  = ?";
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+					PreparedStatement pst = con.prepareStatement(query);
+					pst.setString(1,txtId.getText());
+					
+					ResultSet rs = pst.executeQuery();
+					
+					if(rs.next())
+					{
+						txtMarque.setText(rs.getString("Marque"));
+						txtModele.setText(rs.getString("Modèle"));
+						Antoine.setDate(rs.getDate("Date de Fabrication"));
+						txtCouleur.setText(rs.getString("Couleur"));
+						txtPrix.setText(rs.getString("Prix"));
+						txtQuantite.setText(rs.getString("Quantité"));
+					}
+					
+					
+					}catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}else  {
+					try {
+						String query = "SELECT * FROM `entrepôts plaisance` where id  = ?";
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+					PreparedStatement pst = con.prepareStatement(query);
+					pst.setString(1,txtId.getText());
+					
+					ResultSet rs = pst.executeQuery();
+					
+					if(rs.next())
+					{
+						txtMarque.setText(rs.getString("Marque"));
+						txtModele.setText(rs.getString("Modèle"));
+						Antoine.setDate(rs.getDate("Date de Fabrication"));
+						txtCouleur.setText(rs.getString("Couleur"));
+						txtPrix.setText(rs.getString("Prix"));
+						txtQuantite.setText(rs.getString("Quantité"));
+					}
+					
+					
+					}catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+					
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			}
+		});
+		txtId.setBounds(501, 84, 96, 26);
 		panel.add(txtId);
 		txtId.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("ID");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(446, 78, 57, 25);
+		lblNewLabel_2.setBounds(449, 86, 57, 25);
 		panel.add(lblNewLabel_2);
 		
 		JButton btnNewButton_1_1 = new JButton("Suprimer");
+		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //******************************************************************************************************************************************				
@@ -337,18 +465,19 @@ public class Commande extends JFrame {
 //**********************************************************************************************************************************************			
 			}
 		});
-		btnNewButton_1_1.setBounds(817, 434, 153, 34);
+		btnNewButton_1_1.setBounds(711, 434, 153, 34);
 		panel.add(btnNewButton_1_1);
 		
 		JButton btnNewButton_1 = new JButton("Modifier");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 /**
  * 
- */
+ */             if (comboBox.getSelectedItem() == "Entrepôts Port Louis") {
 				try {
-					String query = "UPDATE `entrepôts plaisance` SET `Marque`=?,`Modèle`=?,`Date de Fabrication`=?,`Couleur`=?,`Prix`=?,`Quantité`=? WHERE ID = ?";
+					String query = "UPDATE `gestiondestock` SET `Marque`=?,`Modèle`=?,`Date de Fabrication`=?,`Couleur`=?,`Prix`=?,`Quantité`=? WHERE ID = ?";
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
 				PreparedStatement pst = con.prepareStatement(query);
 				
@@ -356,7 +485,9 @@ public class Commande extends JFrame {
 				
 				pst.setString(1, txtMarque.getText());
 				pst.setString(2, txtModele.getText() );
-				pst.setString(3, Antoine.getDate() );
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+				String date = sdf.format( Antoine .getDate());
+				pst.setString(3, date );
 				pst.setString(4, txtCouleur.getText() );
 				pst.setString(5, txtPrix.getText() );
 				pst.setString(6, txtQuantite.getText() );
@@ -368,14 +499,99 @@ public class Commande extends JFrame {
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}
-			}
+            }else if (comboBox.getSelectedItem() == "Entrepôts Baie du Tombeau") {
+            	try {
+					String query = "UPDATE `entrepôts_baie_du_tombeau` SET `Marque`=?,`Modèle`=?,`Date de Fabrication`=?,`Couleur`=?,`Prix`=?,`Quantité`=? WHERE ID = ?";
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+				PreparedStatement pst = con.prepareStatement(query);
+				
+	          
+				
+				pst.setString(1, txtMarque.getText());
+				pst.setString(2, txtModele.getText() );
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+				String date = sdf.format( Antoine .getDate());
+				pst.setString(3, date );
+				pst.setString(4, txtCouleur.getText() );
+				pst.setString(5, txtPrix.getText() );
+				pst.setString(6, txtQuantite.getText() );
+				pst.setString(7, txtId.getText() );
+				pst.executeUpdate();
+				con.close();
+				JOptionPane.showMessageDialog(null, "la ligne"+"");
+				
+				}catch (Exception e1) {
+					e1.printStackTrace();
+            }
+            }else if (comboBox.getSelectedItem() == "Entrepôts Phoenix") {
+            	try {
+					String query = "UPDATE `Entrepôts Phoenix` SET `Marque`=?,`Modèle`=?,`Date de Fabrication`=?,`Couleur`=?,`Prix`=?,`Quantité`=? WHERE ID = ?";
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+				PreparedStatement pst = con.prepareStatement(query);
+				
+	          
+				
+				pst.setString(1, txtMarque.getText());
+				pst.setString(2, txtModele.getText() );
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+				String date = sdf.format( Antoine .getDate());
+				pst.setString(3, date );
+				pst.setString(4, txtCouleur.getText() );
+				pst.setString(5, txtPrix.getText() );
+				pst.setString(6, txtQuantite.getText() );
+				pst.setString(7, txtId.getText() );
+				pst.executeUpdate();
+				con.close();
+				JOptionPane.showMessageDialog(null, "la ligne"+"");
+				
+				}catch (Exception e1) {
+					e1.printStackTrace();
+            }
+            }else  {
+            	try {
+					String query = "UPDATE `entrepôts plaisance` SET `Marque`=?,`Modèle`=?,`Date de Fabrication`=?,`Couleur`=?,`Prix`=?,`Quantité`=? WHERE ID = ?";
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sybercar","root","");
+				PreparedStatement pst = con.prepareStatement(query);
+				
+	          
+				
+				pst.setString(1, txtMarque.getText());
+				pst.setString(2, txtModele.getText() );
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+				String date = sdf.format( Antoine .getDate());
+				pst.setString(3, date );
+				pst.setString(4, txtCouleur.getText() );
+				pst.setString(5, txtPrix.getText() );
+				pst.setString(6, txtQuantite.getText() );
+				pst.setString(7, txtId.getText() );
+				pst.executeUpdate();
+				con.close();
+				JOptionPane.showMessageDialog(null, "la ligne"+"");
+				
+				}catch (Exception e1) {
+					e1.printStackTrace();
+            }
+            }
+                      txtMarque.setText(null);
+	                  txtModele.setText(null);
+	                  Antoine.setDate(null);
+	                  txtCouleur.setText(null);
+	                  txtPrix.setText(null);
+	                  txtQuantite.setText(null);
+ }
 		});
-		btnNewButton_1.setBounds(642, 434, 153, 34);
+		btnNewButton_1.setBounds(455, 434, 153, 34);
 		panel.add(btnNewButton_1);
 		
-		JSpinField spinField = new JSpinField();
-		spinField.setBounds(96, 531, 112, 19);
-		panel.add(spinField);
+		quantite = new JSpinField();
+		quantite.setBounds(96, 516, 151, 34);
+		panel.add(quantite);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Antoine\\Downloads\\ildar-garifullin-uX4Bjke_xUE-unsplash.jpg"));
+		lblNewLabel_3.setBackground(Color.CYAN);
+		lblNewLabel_3.setBounds(0, 77, 1182, 513);
+		panel.add(lblNewLabel_3);
 		
 		
 	}
