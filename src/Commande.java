@@ -53,7 +53,6 @@ public class Commande extends JFrame {
 	private JTable table;
 	private JTextField txtId;
 	private JDateChooser Antoine;
-	private JSpinField quantite;
 
 	/**
 	 * Launch the application.
@@ -189,9 +188,7 @@ public class Commande extends JFrame {
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/**
-				 * 
-				 */
+	
 				
 				if (comboBox.getSelectedItem() == "Entrepôts Port Louis") {
 				try {
@@ -582,10 +579,6 @@ public class Commande extends JFrame {
 		});
 		btnNewButton_1.setBounds(455, 434, 153, 34);
 		panel.add(btnNewButton_1);
-		
-		quantite = new JSpinField();
-		quantite.setBounds(96, 516, 151, 34);
-		panel.add(quantite);
 		
 		JLabel lblNewLabel_3 = new JLabel("New label");
 		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Antoine\\Downloads\\ildar-garifullin-uX4Bjke_xUE-unsplash.jpg"));
