@@ -410,7 +410,7 @@ public class Commande extends JFrame {
 				pst.setString(1, txtId.getText() );
 				pst.executeUpdate();
 				con.close();
-				JOptionPane.showMessageDialog(null, "la ligne"+"");
+				JOptionPane.showMessageDialog(null, "supression reussi avec succer");
 				
 				}catch (Exception e1) {
 					e1.printStackTrace();
@@ -424,7 +424,7 @@ public class Commande extends JFrame {
 					pst.setString(1, txtId.getText() );
 					pst.executeUpdate();
 					con.close();
-					JOptionPane.showMessageDialog(null, "la ligne"+"");
+					JOptionPane.showMessageDialog(null, "supression reussi avec succer");
 					
 					}catch (Exception e1) {
 						e1.printStackTrace();
@@ -438,7 +438,7 @@ public class Commande extends JFrame {
 					pst.setString(1, txtId.getText() );
 					pst.executeUpdate();
 					con.close();
-					JOptionPane.showMessageDialog(null, "la ligne"+"");
+					JOptionPane.showMessageDialog(null, "supression reussi avec succer");
 					
 					}catch (Exception e1) {
 						e1.printStackTrace();
@@ -452,7 +452,7 @@ public class Commande extends JFrame {
 					pst.setString(1, txtId.getText() );
 					pst.executeUpdate();
 					con.close();
-					JOptionPane.showMessageDialog(null, "la ligne"+"");
+					JOptionPane.showMessageDialog(null, "supression reussi avec succer");
 					
 					}catch (Exception e1) {
 						e1.printStackTrace();
@@ -491,7 +491,7 @@ public class Commande extends JFrame {
 				pst.setString(7, txtId.getText() );
 				pst.executeUpdate();
 				con.close();
-				JOptionPane.showMessageDialog(null, "la ligne"+"");
+				JOptionPane.showMessageDialog(null, "modification reussi");
 				
 				}catch (Exception e1) {
 					e1.printStackTrace();
@@ -515,7 +515,7 @@ public class Commande extends JFrame {
 				pst.setString(7, txtId.getText() );
 				pst.executeUpdate();
 				con.close();
-				JOptionPane.showMessageDialog(null, "la ligne"+"");
+				JOptionPane.showMessageDialog(null, "modification reussi");
 				
 				}catch (Exception e1) {
 					e1.printStackTrace();
@@ -563,7 +563,7 @@ public class Commande extends JFrame {
 				pst.setString(7, txtId.getText() );
 				pst.executeUpdate();
 				con.close();
-				JOptionPane.showMessageDialog(null, "la ligne"+"");
+				JOptionPane.showMessageDialog(null, "modification reussi");
 				
 				}catch (Exception e1) {
 					e1.printStackTrace();
